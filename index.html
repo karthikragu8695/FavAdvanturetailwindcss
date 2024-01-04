@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tailwind Starter Template - Nordic Shop: Tailwind Toolbox</title>
+    <meta name="description" content="Free open source Tailwind CSS Store template">
+    <meta name="keywords" content="tailwind,tailwindcss,tailwind css,css,starter template,free template,store template, shop layout, minimal, monochrome, minimalistic, theme, nordic">
+    
+    <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"/>
+	
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:200,400&display=swap" rel="stylesheet">
+
+    <style>
+        a{
+            font-family:Georgia, 'Times New Roman', Times, serif
+        }
+        .work-sans {
+            font-family: 'Work Sans', sans-serif;
+        }
+                
+        #menu-toggle:checked + #menu {
+            display: block;
+        }
+        
+        .hover\:grow {
+            transition: all 0.3s;
+            transform: scale(1);
+        }
+        
+        .hover\:grow:hover {
+            transform: scale(1.02);
+        }
+        
+        .carousel-open:checked + .carousel-item {
+            position: static;
+            opacity: 100;
+        }
+        
+        .carousel-item {
+            -webkit-transition: opacity 0.6s ease-out;
+            transition: opacity 0.6s ease-out;
+        }
+        
+        #carousel-1:checked ~ .control-1,
+        #carousel-2:checked ~ .control-2,
+        #carousel-3:checked ~ .control-3 {
+            display: block;
+        }
+        
+        .carousel-indicators {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            position: absolute;
+            bottom: 2%;
+            left: 0;
+            right: 0;
+            text-align: center;
+            z-index: 10;
+        }
+        
+        #carousel-1:checked ~ .control-1 ~ .carousel-indicators li:nth-child(1) .carousel-bullet,
+        #carousel-2:checked ~ .control-2 ~ .carousel-indicators li:nth-child(2) .carousel-bullet,
+        #carousel-3:checked ~ .control-3 ~ .carousel-indicators li:nth-child(3) .carousel-bullet {
+            color: #000;
+            /*Set to match the Tailwind colour you want the active one to be */
+        }
+        .video-docker video {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .video-docker::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 1;
+    }
+    </style>
+
+</head>
+
+<body class="bg-gray-400 text-gray-600 work-sans leading-normal text-base tracking-normal">
+
+    <!----------------Nav------------------->
+    <nav id="header" class="w-full z-30 top-0 py-1 sticky bg-purple-400">
+        <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-6 py-3">
+            <div class="order-2 md:order-1">
+                <a class="flex items-center tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl " href="#">
+                    <img class="w-auto h-8 sm:h-10" src="https://static.vecteezy.com/system/resources/thumbnails/024/684/356/small/illustration-of-eagle-head-logo-with-ai-generative-free-png.png" loading="lazy" width="202" height="40">
+                    <span class="text-white">Favorite</span> <span class="text-red-500">Adventures</span>
+                </a>
+            </div>
+            <label for="menu-toggle" class="cursor-pointer md:hidden block">
+                <svg class="fill-current text-gray-900" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+                    <title>menu</title>
+                    <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
+                </svg>
+            </label>
+            <input class="hidden" type="checkbox" id="menu-toggle" />
+
+            <div class="hidden md:flex md:items-center md:w-auto w-full order-3 md:order-2" id="menu">
+                <nav>
+                    <ul class="md:flex items-center justify-between text-base text-gray-700 pt-4 md:pt-0">
+                        <li><a class="inline-block no-underline hover:text-black ml-3      rounded-xl px-2 lg:border-b border-black hover:border-red-300 hover:text-red-300 "  href="#">Home</a></li>
+                        <li><a class="inline-block no-underline hover:text-black  ml-3   rounded-xl px-2 lg:border-b border-black hover:border-green-300 hover:text-green-300" href="#about">About</a></li>
+                        <li><a class="inline-block no-underline hover:text-black  ml-3   rounded-xl px-2 lg:border-b border-black hover:border-yellow-300 hover:text-yellow-300" href="#Gallery">Gallery</a></li>
+                        <li><a class="inline-block no-underline hover:text-black  ml-3   rounded-xl px-2 lg:border-b border-black hover:border-blue-300 hover:text-blue-300" href="#services">Service</a></li>
+                        <li><a class="inline-block no-underline hover:text-black  ml-3   rounded-xl px-2 lg:border-b border-black hover:border-pink-300 hover:text-pink-00" href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            
+
+            <div class="order-2 md:order-3 flex items-center" id="nav-content">
+
+                <a class="inline-block no-underline hover:text-black" href="#">
+                    <svg class="fill-current hover:text-black" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <circle fill="none" cx="12" cy="7" r="3" />
+                        <path d="M12 2C9.243 2 7 4.243 7 7s2.243 5 5 5 5-2.243 5-5S14.757 2 12 2zM12 10c-1.654 0-3-1.346-3-3s1.346-3 3-3 3 1.346 3 3S13.654 10 12 10zM21 21v-1c0-3.859-3.141-7-7-7h-4c-3.86 0-7 3.141-7 7v1h2v-1c0-2.757 2.243-5 5-5h4c2.757 0 5 2.243 5 5v1H21z" />
+                    </svg>
+                </a>
+
+                <a class="pl-3 inline-block no-underline hover:text-black" href="#">
+                    <svg class="fill-current hover:text-black" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path d="M21,7H7.462L5.91,3.586C5.748,3.229,5.392,3,5,3H2v2h2.356L9.09,15.414C9.252,15.771,9.608,16,10,16h8 c0.4,0,0.762-0.238,0.919-0.606l3-7c0.133-0.309,0.101-0.663-0.084-0.944C21.649,7.169,21.336,7,21,7z M17.341,14h-6.697L8.371,9 h11.112L17.341,14z" />
+                        <circle cx="10.5" cy="18.5" r="1.5" />
+                        <circle cx="17.5" cy="18.5" r="1.5" />
+                    </svg>
+                </a>
+
+            </div>
+        </div>
+    </nav>
+    <!---------------slider------------------>
+    <div class="carousel relative container mx-auto" style="max-width:1600px;">
+        <div class="carousel-inner relative overflow-hidden w-full">
+            <!--Slide 1-->
+            <input class="carousel-open" type="radio" id="carousel-1" name="carousel" aria-hidden="true" hidden="" checked="checked">
+            <div class="carousel-item absolute opacity-0" style="height:85vh;">
+                <div class="block h-full w-full mx-auto flex pt-6 md:pt-0 md:items-center bg-cover bg-right" style="background-image: url('https://img.lovepik.com/photo/48016/9197.jpg_wh860.jpg');">
+
+                    <div class="container mx-auto">
+                        <div class="flex flex-col w-full lg:w-1/2 md:ml-16 items-center md:items-start px-6 tracking-wide">
+                            <p class="text-black text-2xl my-4">Stripy Zig Zag Jigsaw Pillow and Duvet Set</p>
+                            <a class="text-xl inline-block no-underline border-b border-gray-600 leading-relaxed hover:text-black hover:border-black" href="#">view product</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <label for="carousel-3" class="prev control-1 w-10 h-10 ml-2 md:ml-10 absolute cursor-pointer hidden text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-gray-900 leading-tight text-center z-10 inset-y-0 left-0 my-auto">‹</label>
+            <label for="carousel-2" class="next control-1 w-10 h-10 mr-2 md:mr-10 absolute cursor-pointer hidden text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-gray-900 leading-tight text-center z-10 inset-y-0 right-0 my-auto">›</label>
+
+            <!--Slide 2-->
+            <input class="carousel-open" type="radio" id="carousel-2" name="carousel" aria-hidden="true" hidden="">
+            <div class="carousel-item absolute opacity-0 bg-cover bg-right" style="height:85vh;">
+                <div class="block h-full w-full mx-auto flex pt-6 md:pt-0 md:items-center bg-cover bg-right" style="background-image: url('https://media.istockphoto.com/id/525670203/photo/snow-biking-couple.jpg?s=1024x1024&w=is&k=20&c=OWzaW9H2xg2IMTYWM7q_hDgUGD3h7ivbfhqRg6Y6Mhw=');">
+
+                    <div class="container mx-auto">
+                        <div class="flex flex-col w-full lg:w-1/2 md:ml-16 items-center md:items-start px-6 tracking-wide">
+                            <p class="text-black text-2xl my-4">Real Bamboo Wall Clock</p>
+                            <a class="text-xl inline-block no-underline border-b border-gray-600 leading-relaxed hover:text-black hover:border-black" href="#">view product</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <label for="carousel-1" class="prev control-2 w-10 h-10 ml-2 md:ml-10 absolute cursor-pointer hidden text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-gray-900  leading-tight text-center z-10 inset-y-0 left-0 my-auto">‹</label>
+            <label for="carousel-3" class="next control-2 w-10 h-10 mr-2 md:mr-10 absolute cursor-pointer hidden text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-gray-900  leading-tight text-center z-10 inset-y-0 right-0 my-auto">›</label>
+
+            <!--Slide 3-->
+            <input class="carousel-open" type="radio" id="carousel-3" name="carousel" aria-hidden="true" hidden="">
+            <div class="carousel-item absolute opacity-0" style="height:85vh;">
+                <div class="block h-full w-full mx-auto flex pt-6 md:pt-0 md:items-center bg-cover bg-bottom" style="background-image: url('https://images.pexels.com/photos/1365425/pexels-photo-1365425.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');">
+
+                    <div class="container mx-auto">
+                        <div class="flex flex-col w-full lg:w-1/2 md:ml-16 items-center md:items-start px-6 tracking-wide">
+                            <p class="text-black text-2xl my-4">Brown and blue hardbound book</p>
+                            <a class="text-xl inline-block no-underline border-b border-gray-600 leading-relaxed hover:text-black hover:border-black" href="#">view product</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <label for="carousel-2" class="prev control-3 w-10 h-10 ml-2 md:ml-10 absolute cursor-pointer hidden text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-gray-900  leading-tight text-center z-10 inset-y-0 left-0 my-auto">‹</label>
+            <label for="carousel-1" class="next control-3 w-10 h-10 mr-2 md:mr-10 absolute cursor-pointer hidden text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-gray-900  leading-tight text-center z-10 inset-y-0 right-0 my-auto">›</label>
+
+            <!-- Add additional indicators for each slide-->
+            <ol class="carousel-indicators">
+                <li class="inline-block mr-3">
+                    <label for="carousel-1" class="carousel-bullet cursor-pointer block text-4xl text-gray-400 hover:text-gray-900">•</label>
+                </li>
+                <li class="inline-block mr-3">
+                    <label for="carousel-2" class="carousel-bullet cursor-pointer block text-4xl text-gray-400 hover:text-gray-900">•</label>
+                </li>
+                <li class="inline-block mr-3">
+                    <label for="carousel-3" class="carousel-bullet cursor-pointer block text-4xl text-gray-400 hover:text-gray-900">•</label>
+                </li>
+            </ol>
+
+        </div>
+    </div>
+    <!------------Video Section ------------->
+    <section >
+        <h2 class="text-3xl font-bold ml-20 mt-20  ">Video</h2>
+    <div class="relative h-screen   flex flex-col   items-center mt-10 text-white ">
+        <div class="video-docker absolute  w-1/2 h-96 rounded-2xl overflow-hidden">
+            <video class="absolute object-cover"
+                src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4"
+                type="video/mp4" autoplay muted loop></video>
+        </div>
+    </div>  
+</section>
+    <!------------About section-------------->
+<section id="about" class="bg-yellow-50 overflow-hidden lg:pb-20  md:pt-20 sm:pt-16 2xl:pt-16">
+    
+    <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
+        <div class="grid items-center grid-cols-1 md:grid-cols-2">
+            <div>
+                <h2 class="text-3xl font-bold leading-tight text-gray sm:text-4xl lg:text-5xl">AboutUs</h2>
+                <h2 class="text-2xl font-bold leading-tight text-black sm:text-4xl lg:text-2xl mt-6">Hey  I am
+                    <br class="block sm:hidden" />Jenny Carter
+                </h2>
+                <p class="max-w-lg mt-2 text-xl leading-relaxed text-gray-600 md:mt-8">
+                   Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magni, cupiditate error repudiandae doloremque at soluta excepturi fuga delectus necessitatibus totam  
+                </p>
+
+                <p class="mt-4 text-xl text-gray-600 md:mt-8">
+                    <span class="relative inline-block">
+                        <span class="absolute inline-block w-full bottom-0.5 h-2 "></span>
+                    <span class="relative"> Have a question? </span>
+                    </span>
+                    <br class="block sm:hidden" />Ask me on <a href="#" title=""
+                        class="transition-all duration-200 text-sky-500 hover:text-sky-600 hover:underline">Twitter</a>
+                </p>
+            </div>
+
+            <div class="relative">
+                <img class="absolute inset-x-0 inset-y-200 inset-y-48 bottom-0 -mb-48 -translate-x-1/2 left-1/2" src="https://cdn.rareblocks.xyz/collection/celebration/images/team/1/blob-shape.svg" alt="" />
+
+                <img class="relative w-full xl:max-w-lg xl:mx-auto 2xl:origin-bottom 2xl:scale-110" src="https://png.pngtree.com/png-clipart/20230502/original/pngtree-adventure-logo-png-image_9133525.png" alt="" />
+            </div>
+
+        </div>
+    </div>
+</section>
+    <!--------------gallery------------------>
+<section id="Gallery" class="bg-red-100  lg:pt-20 lg:pb-20">
+<h2 class="font-bold text-3xl text-center mb-5">Gallery</h2>
+
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+
+    <div class="group cursor-pointer relative">
+      <img
+        src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw1fHxuYXR1cmV8ZW58MHwwfHx8MTY5NDA5OTcyOXww&ixlib=rb-4.0.3&q=80&w=1080"
+        alt="Image 1"
+        class="w-full h-48 object-cover rounded-lg transition-transform transform scale-100 group-hover:scale-105"
+      />
+      <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+        <!-- <button class="bg-white text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors">
+          View
+        </button> -->
+      </div>
+    </div>
+   
+    <div class="group cursor-pointer relative">
+      <img
+        src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw5fHxuYXR1cmV8ZW58MHwwfHx8MTY5NDA5OTcyOXww&ixlib=rb-4.0.3&q=80&w=1080"
+        alt="Image 1"
+        class="w-full h-48 object-cover rounded-lg transition-transform transform scale-100 group-hover:scale-105"
+      />
+      <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+        <!-- <button class="bg-white text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors">
+          View
+        </button> -->
+      </div>
+    </div>
+   
+    <div class="group cursor-pointer relative">
+      <img
+        src="https://images.unsplash.com/photo-1501854140801-50d01698950b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxMHx8bmF0dXJlfGVufDB8MHx8fDE2OTQwOTk3Mjl8MA&ixlib=rb-4.0.3&q=80&w=1080"
+        alt="Image 1"
+        class="w-full h-48 object-cover rounded-lg transition-transform transform scale-100 group-hover:scale-105"
+      />
+      <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+        <!-- <button class="bg-white text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors">
+          View
+        </button> -->
+      </div>
+    </div>
+   
+    <div class="group cursor-pointer relative">
+      <img
+        src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwyfHxuYXR1cmV8ZW58MHwwfHx8MTY5NDA5OTcyOXww&ixlib=rb-4.0.3&q=80&w=1080"
+        alt="Image 1"
+        class="w-full h-48 object-cover rounded-lg transition-transform transform scale-100 group-hover:scale-105"
+      />
+      <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+        <!-- <button class="bg-white text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors">
+          View
+        </button> -->
+      </div>
+    </div>
+   
+    <div class="group cursor-pointer relative">
+      <img
+        src="https://images.unsplash.com/photo-1505765050516-f72dcac9c60e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxNHx8bmF0dXJlfGVufDB8MHx8fDE2OTQwOTk3Mjl8MA&ixlib=rb-4.0.3&q=80&w=1080"
+        alt="Image 1"
+        class="w-full h-48 object-cover rounded-lg transition-transform transform scale-100 group-hover:scale-105"
+      />
+      <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+        <!-- <button class="bg-white text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors">
+          View
+        </button> -->
+      </div>
+    </div>
+   
+    <div class="group cursor-pointer relative">
+      <img
+        src="https://images.unsplash.com/photo-1475924156734-496f6cac6ec1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxMXx8bmF0dXJlfGVufDB8MHx8fDE2OTQwOTk3Mjl8MA&ixlib=rb-4.0.3&q=80&w=1080"
+        alt="Image 1"
+        class="w-full h-48 object-cover rounded-lg transition-transform transform scale-100 group-hover:scale-105"
+      />
+      <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+        <!-- <button class="bg-white text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors">
+          View
+        </button> -->
+      </div>
+    </div>
+   
+    <div class="group cursor-pointer relative">
+      <img
+        src="https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw0fHxuYXR1cmV8ZW58MHwwfHx8MTY5NDA5OTcyOXww&ixlib=rb-4.0.3&q=80&w=1080"
+        alt="Image 1"
+        class="w-full h-48 object-cover rounded-lg transition-transform transform scale-100 group-hover:scale-105"
+      />
+      <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+        <!-- <button class="bg-white text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors">
+          View
+        </button> -->
+      </div>
+    </div>
+   
+    <div class="group cursor-pointer relative">
+      <img
+        src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw1fHxuYXR1cmV8ZW58MHwwfHx8MTY5NDA5OTcyOXww&ixlib=rb-4.0.3&q=80&w=1080"
+        alt="Image 1"
+        class="w-full h-48 object-cover rounded-lg transition-transform transform scale-100 group-hover:scale-105"
+      />
+      <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+        <!-- <button class="bg-white text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors">
+          View
+        </button> -->
+      </div>
+      
+    </div>
+    
+   
+    <!-- <div class="group cursor-pointer relative">
+      <img
+        src="https://images.unsplash.com/photo-1426604966848-d7adac402bff?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw3fHxuYXR1cmV8ZW58MHwwfHx8MTY5NDA5OTcyOXww&ixlib=rb-4.0.3&q=80&w=1080"
+        alt="Image 1"
+        class="w-full h-48 object-cover rounded-lg transition-transform transform scale-100 group-hover:scale-105"
+      />
+      <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+        <button class="bg-white text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors">
+          View
+        </button>
+      </div>
+    </div>
+   
+    <div class="group cursor-pointer relative">
+      <img
+        src="https://images.unsplash.com/photo-1419133203517-f3b3ed0ba2bb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw1fHxyaXZlcnxlbnwwfDB8fHwxNjk0MDk5ODgyfDA&ixlib=rb-4.0.3&q=80&w=1080"
+        alt="Image 1"
+        class="w-full h-48 object-cover rounded-lg transition-transform transform scale-100 group-hover:scale-105"
+      />
+      <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+        <button class="bg-white text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors">
+          View
+        </button>
+      </div>
+    </div>
+   
+    <div class="group cursor-pointer relative">
+      <img
+        src="https://images.unsplash.com/photo-1498855926480-d98e83099315?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw4fHxyaXZlcnxlbnwwfDB8fHwxNjk0MDk5ODgyfDA&ixlib=rb-4.0.3&q=80&w=1080"
+        alt="Image 1"
+        class="w-full h-48 object-cover rounded-lg transition-transform transform scale-100 group-hover:scale-105"
+      />
+      <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+        <button class="bg-white text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors">
+          View
+        </button>
+      </div>
+    </div>
+   
+    <div class="group cursor-pointer relative">
+      <img
+        src="https://images.unsplash.com/photo-1502754400466-c87ff3039da7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxMXx8cml2ZXJ8ZW58MHwwfHx8MTY5NDA5OTg4Mnww&ixlib=rb-4.0.3&q=80&w=1080"
+        alt="Image 1"
+        class="w-full h-48 object-cover rounded-lg transition-transform transform scale-100 group-hover:scale-105"
+      />
+      <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+        <button class="bg-white text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors">
+          View
+        </button>
+      </div>
+    </div> -->
+  </div>
+  <a href="" class="text-indigo-700 border border-indigo-600 mb-5 py-2 px-4 ml-5 rounded inline-flex items-center">
+    View More
+    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        viewBox="0 0 24 24" class="w-6 h-6 ml-2">
+        <path d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+    </svg>
+</a>
+</section>
+    <!--------------service------------------>
+<div id="services" class=" lg:pt-20 px-2 py-10">
+    <div id="features" class="mx-auto max-w-6xl">
+      <h2 class="text-center font-display text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">
+       Services
+      </h2>
+      
+      <ul class="mt-10 grid grid-cols-1 gap-6 text-center text-slate-700 md:grid-cols-3">
+        
+        <li class="rounded-xl bg-white px-6 py-6 shadow-sm">
+            
+            <div class="relative flex justify-center items-center">
+                <div class="absolute animate-spin rounded-full h-14 w-14 border-t-4 border-b-4 border-purple-500"></div>
+                <img src="https://svgsilh.com/svg/310829.svg" class="rounded-full mx-auto h-10 w-10 ">
+            </div>
+          <h3 class="my-3 font-display font-medium">Powered by ChatGPT</h3>
+          <p class="mt-1.5 text-sm leading-6 text-secondary-500">
+            the cutting-edge language model that makes interactions a breeze. With its user-friendly interface,
+            effortlessly tap into the world of AI-generated text.
+          </p>
+  
+        </li>
+        <li class="rounded-xl bg-white px-6 py-8 shadow-sm">
+            <div class="relative flex justify-center items-center">
+                <div class="absolute animate-spin rounded-full h-14 w-14 border-t-4 border-b-4 border-purple-500"></div>
+                <img src="https://svgsilh.com/svg/1933362.svg" class="rounded-full mx-auto h-10 w-10 ">
+            </div>
+          <h3 class="my-3 font-display font-medium">Easy to use</h3>
+          <p class="mt-1.5 text-sm leading-6 text-secondary-500">
+            Simply input your subject, click the generate button, and the result will appear in seconds just like
+            magick.
+          </p>
+  
+        </li>
+        <li class="rounded-xl bg-white px-6 py-8 shadow-sm">
+            <div class="relative flex justify-center items-center">
+                <div class="absolute animate-spin rounded-full h-14 w-14 border-t-4 border-b-4 border-purple-500"></div>
+                <img src="https://cdn1.iconfinder.com/data/icons/adventure-outline-1/64/Adventure-Line-15-512.png" class="rounded-full mx-auto h-10 w-10 ">
+            </div>
+          <h3 class="my-3 font-display font-medium">Custom settings</h3>
+          <p class="mt-1.5 text-sm leading-6 text-secondary-500">
+            We offer advanced customization. You can freely combine options like roles, languages, publish, tones,
+            lengths,
+            and formats.
+          </p>
+  
+        </li>
+        <li class="rounded-xl bg-white px-6 py-8 shadow-sm">
+          <a href="#services" class="group">
+            <div class="relative flex justify-center items-center">
+                <div class="absolute animate-spin rounded-full h-14 w-14 border-t-4 border-b-4 border-purple-500"></div>
+                <img src="https://svgsilh.com/svg/2154586.svg" class="rounded-full mx-auto h-10 w-10 ">
+            </div>
+            <h3 class="my-3 font-display font-medium group-hover:text-primary-500">Free trial</h3>
+            <p class="mt-1.5 text-sm leading-6 text-secondary-500">We offer a free trial service without login. We
+              provide
+              many payment options including pay-as-you-go and subscription.</p>
+          </a>
+        </li>
+        <li class="rounded-xl bg-white px-6 py-8 shadow-sm">
+          <a href="#services    " class="group">
+            <div class="relative flex justify-center items-center">
+                <div class="absolute animate-spin rounded-full h-14 w-14 border-t-4 border-b-4 border-purple-500"></div>
+                <img src="https://www.svgrepo.com/show/424480/adventure-road-street-sign.svg" class="rounded-full mx-auto h-10 w-10 ">
+            </div>  
+            <h3 class="my-3 font-display font-medium group-hover:text-primary-500">
+              90+ templates
+            </h3>
+            <p class="mt-1.5 text-sm leading-6 text-secondary-500">We offer many templates covering areas such as
+              writing,
+              education, lifestyle and creativity to inspire your potential. </p>
+          </a>
+        </li>
+        <li class="rounded-xl bg-white px-6 py-8 shadow-sm">
+          <a href="#services" class="group">
+            <div class="relative flex justify-center items-center">
+                <div class="absolute animate-spin rounded-full h-14 w-14 border-t-4 border-b-4 border-purple-500"></div>
+                <img src="https://svgsilh.com/svg_v2/1345869.svg"  class="rounded-full mx-auto h-10 w-10 ">
+            </div> 
+            <h3 class="my-3 font-display font-medium group-hover:text-primary-500">Use Anywhere</h3>
+            <p class="mt-1.5 text-sm leading-6 text-secondary-500">Our product is compatible with multiple platforms
+              including Web, Chrome, Windows and Mac, you can use MagickPen anywhere.</p>
+          </a>
+        </li>
+      </ul>
+    </div>
+</div>
+     <!-------------Contactus---------------->
+        <section id="contact" class="bg-purple-50 overflow-hidden dark:bg-slate-800" id="contact">
+            <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+                <div class="mb-4">
+                    <div class="mb-6 max-w-3xl text-center sm:text-center md:mx-auto md:mb-12">
+                        <p class="text-base font-semibold uppercase tracking-wide text-3xl text-black dark:text-blue-200">
+                            Contact
+                        </p>
+                    </div>
+                </div>
+                <div class="flex items-stretch justify-center">
+                    <div class="grid md:grid-cols-2">
+                        <div class="relative overflow-hidden">
+                            <img class="absolute inset-y-200  bottom-0 -mb-30 -translate-x-1/2 left-2" src="https://creazilla-store.fra1.digitaloceanspaces.com/silhouettes/1631547/abstract-shape-silhouette-fed530-sm.png" alt="" />
+            
+                            <img class="relative w-full xl:max-w-lg xl:mx-auto   2xl:origin-bottom 2xl:scale-110" src="https://cdn3d.iconscout.com/3d/premium/thumb/man-watching-presentation-in-mobile-6929518-5700462.png" alt="" />
+                        </div>
+                        <div class="card h-fit max-w-6xl p-5 md:p-12" id="form">
+                            <h2 class="mb-4 text-2xl text-black font-bold">Ready to Get Started?</h2>
+                            <form id="contactForm">
+                                <div class="mb-6">
+                                    <div class="mx-0 mb-1 sm:mb-4">
+                                        <div class="mx-0 mb-1 sm:mb-4">
+                                            <label for="name" class="pb-1 text-xs uppercase tracking-wider"></label><input type="text" id="name" autocomplete="given-name" placeholder="Your name" class="mb-2 w-full rounded-md border border-gray-400 py-2 pl-2 pr-4 shadow-md dark:text-gray-300 sm:mb-0" name="name">
+                                        </div>
+                                        <div class="mx-0 mb-1 sm:mb-4">
+                                            <label for="email" class="pb-1 text-xs uppercase tracking-wider"></label><input type="email" id="email" autocomplete="email" placeholder="Your email address" class="mb-2 w-full rounded-md border border-gray-400 py-2 pl-2 pr-4 shadow-md dark:text-gray-300 sm:mb-0" name="email">
+                                        </div>
+                                    </div>
+                                    <div class="mx-0 mb-1 sm:mb-4">
+                                        <label for="textarea" class="pb-1 text-xs uppercase tracking-wider"></label><textarea id="textarea" name="textarea" cols="30" rows="5" placeholder="Write your message..." class="mb-2 w-full rounded-md border border-gray-400 py-2 pl-2 pr-4 shadow-md dark:text-gray-300 sm:mb-0"></textarea>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="w-full bg-yellow-400 text-white px-6 py-3 font-xl rounded-md sm:mb-0">Send Message</button>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+        </section>  
+     <!---------------Footer----------------->
+    <footer class="flex flex-col space-y-10  border-t border-gray-400 justify-center m-10">
+
+        <nav class="flex justify-center mt-10 flex-wrap gap-6 text-gray-500 font-medium">
+            <a class="hover:text-gray-900" href="#">Home</a>
+            <a class="hover:text-gray-900" href="#about">About</a>
+            <a class="hover:text-gray-900" href="#services">Services</a>
+            <a class="hover:text-gray-900" href="#">Media</a>
+            <a class="hover:text-gray-900" href="#Gallery">Gallery</a>
+            <a class="hover:text-gray-900" href="#contact">Contact</a>
+        </nav>
+        
+        <div class="flex justify-center  space-x-5">
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+                <img src="https://img.icons8.com/fluent/30/000000/facebook-new.png" />
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+                <img src="https://img.icons8.com/fluent/30/000000/linkedin-2.png" />
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+                <img src="https://img.icons8.com/fluent/30/000000/instagram-new.png" />
+            </a>
+            <a href="https://messenger.com" target="_blank" rel="noopener noreferrer">
+                <img src="https://img.icons8.com/fluent/30/000000/facebook-messenger--v2.png" />
+            </a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+                <img src="https://img.icons8.com/fluent/30/000000/twitter.png" />
+            </a>
+        </div>
+        <p class="text-center text-gray-700 font-medium">&copy; 2024 Company Ltd. All rights reservered.</p>
+    </footer>
+    
+</footer>
+
+
+</body>
+
+</html>
