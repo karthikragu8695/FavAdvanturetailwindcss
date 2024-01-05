@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <section  class="bg-red-100 px-3 lg:pt-20 lg:pb-20">
+        <h2 class="font-bold text-3xl text-center text-black mb-5">Gallery</h2>
+        <div class="px-4  mx-auto max-w-7xl">
+          <div class="w-full mx-auto text-left md:w-11/12 xl:w-9/12 md:text-center">
+            <h1 class="mb-6 text-4xl font-extrabold leading-none tracking-normal text-gray-900 md:text-6xl md:tracking-tight">
+              
+            </h1>
+          </div>
+    
+        </div>
+    
+        <section>
+    
+          <div x-data="{
+                imageGalleryOpened: false,
+                imageGalleryActiveUrl: null,
+                imageGalleryImageIndex: null,
+                imageGalleryOpen(event) {
+                    this.imageGalleryImageIndex = event.target.dataset.index;
+                    this.imageGalleryActiveUrl = event.target.src;
+                    this.imageGalleryOpened = true;
+                },
+                imageGalleryClose() {
+                    this.imageGalleryOpened = false;
+                    setTimeout(() => this.imageGalleryActiveUrl = null, 300);
+                },
+                imageGalleryNext(){
+                    if(this.imageGalleryImageIndex == this.$refs.gallery.childElementCount){
+                        this.imageGalleryImageIndex = 1;
+                    } else {
+                        this.imageGalleryImageIndex = parseInt(this.imageGalleryImageIndex) + 1;
+                    }
+                    this.imageGalleryActiveUrl = this.$refs.gallery.querySelector('[data-index=\'' + this.imageGalleryImageIndex + '\']').src;
+                },
+                imageGalleryPrev() {
+                    if(this.imageGalleryImageIndex == 1){
+                        this.imageGalleryImageIndex = this.$refs.gallery.childElementCount;
+                    } else {
+                        this.imageGalleryImageIndex = parseInt(this.imageGalleryImageIndex) - 1;
+                    }
+    
+                    this.imageGalleryActiveUrl = this.$refs.gallery.querySelector('[data-index=\'' + this.imageGalleryImageIndex + '\']').src;
+                    
+                }
+            }" @image-gallery-next.window="imageGalleryNext()" @image-gallery-prev.window="imageGalleryPrev()" @keyup.right.window="imageGalleryNext();" @keyup.left.window="imageGalleryPrev();" x-init="
+                imageGalleryPhotos = $refs.gallery.querySelectorAll('img');
+                for(let i=0; i<imageGalleryPhotos.length; i++){
+                    imageGalleryPhotos[i].setAttribute('data-index', i+1);
+                }
+            " class="w-full h-full select-none">
+            <div class="max-w-6xl mx-auto duration-1000 delay-300 opacity-0 select-none ease animate-fade-in-view" style="translate: none; rotate: none; scale: none; opacity: 1; transform: translate(0px, 0px);">
+              <ul x-ref="gallery" id="gallery" class="grid grid-cols-2 gap-5 lg:grid-cols-5">
+                <li><img x-on:click="imageGalleryOpen" src="https://www.pixelstalk.net/wp-content/uploads/2016/09/Adventure-HD-Wallpaper.jpg" class="object-cover select-none w-full h-auto bg-gray-200 rounded cursor-zoom-in aspect-[5/6] lg:aspect-[2/3] xl:aspect-[3/4]" alt="photo gallery image 01"></li>
+                <li><img x-on:click="imageGalleryOpen" src="https://w0.peakpx.com/wallpaper/389/253/HD-wallpaper-ktm-adventure-390-ktm-lover-off-road-king.jpg" class="object-cover select-none w-full h-auto bg-gray-200 rounded cursor-zoom-in aspect-[5/6] lg:aspect-[2/3] xl:aspect-[3/4]" alt="photo gallery image 07"></li>
+                <li><img x-on:click="imageGalleryOpen" src="https://wallpapers.com/images/hd/adventure-1920-x-1080-picture-i99yh8ljhuqmvegu.jpg" class="object-cover select-none w-full h-auto bg-gray-200 rounded cursor-zoom-in aspect-[5/6] lg:aspect-[2/3] xl:aspect-[3/4]" alt="photo gallery image 08"></li>
+                <li><img x-on:click="imageGalleryOpen" src="https://images.pexels.com/photos/238631/pexels-photo-238631.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500  " class="object-cover select-none w-full h-auto bg-gray-200 rounded cursor-zoom-in aspect-[5/6] lg:aspect-[2/3] xl:aspect-[3/4]" alt="photo gallery image 09"></li>
+                <li><img x-on:click="imageGalleryOpen" src="https://c0.wallpaperflare.com/preview/766/693/165/nature-and-landscapes-travel-adventure-trip.jpg" class="object-cover select-none w-full h-auto bg-gray-200 rounded cursor-zoom-in aspect-[5/6] lg:aspect-[2/3] xl:aspect-[3/4]" alt="photo gallery image 10"></li>
+                <li><img x-on:click="imageGalleryOpen" src="https://w0.peakpx.com/wallpaper/224/261/HD-wallpaper-serenity-on-the-summit-sunset-camping-adventure-beautyofnatutre-nature-natureadventures-sunset.jpg" class="object-cover select-none w-full h-auto bg-gray-200 rounded cursor-zoom-in aspect-[5/6] lg:aspect-[2/3] xl:aspect-[3/4]" alt="photo gallery image 06"></li>
+                <li><img x-on:click="imageGalleryOpen" src="https://media.istockphoto.com/id/1445528561/photo/aerial-view-of-man-and-woman-raising-holding-arms-in-mountains-in-norway.webp?b=1&s=170667a&w=0&k=20&c=1ObJMibIRGZdgK63LZG9cuH36l-jd_ByuAeG1nwpDqQ=" class="object-cover select-none w-full h-auto bg-gray-200 rounded cursor-zoom-in aspect-[5/6] lg:aspect-[2/3] xl:aspect-[3/4]" alt="photo gallery image 07"></li>
+                
+                <li><img x-on:click="imageGalleryOpen" src="https://static.vecteezy.com/system/resources/previews/032/991/881/non_2x/men-hiking-mountain-peak-backpacks-filled-with-adventure-and-exploration-generated-by-ai-free-photo.jpg" class="object-cover select-none w-full h-auto bg-gray-200 rounded cursor-zoom-in aspect-[5/6] lg:aspect-[2/3] xl:aspect-[3/4]" alt="photo gallery image 08"></li>
+                <li><img x-on:click="imageGalleryOpen" src="https://static.vecteezy.com/system/resources/thumbnails/028/690/635/small_2x/outdoors-camping-car-travel-mountain-adventure-summer-vacations-motor-home-generated-by-ai-photo.jpg" class="object-cover select-none w-full h-auto bg-gray-200 rounded cursor-zoom-in aspect-[5/6] lg:aspect-[2/3] xl:aspect-[3/4]" alt="photo gallery image 09"></li>
+                <li><img x-on:click="imageGalleryOpen" src="https://img.freepik.com/free-photo/rear-view-young-backpacker-couple-sitting-relax-front-tent-near-lake-with-coffee-set-making-fresh-coffee-grinder-while-camping-trip-summer-vacation_1150-48396.jpg?size=626&ext=jpg&ga=GA1.1.1222169770.1701648000&semt=ais" class="object-cover select-none w-full h-auto bg-gray-200 rounded cursor-zoom-in aspect-[5/6] lg:aspect-[2/3] xl:aspect-[3/4]" alt="photo gallery image 10"></li>
+                <li><img x-on:click="imageGalleryOpen" src="https://www.pixelstalk.net/wp-content/uploads/2016/09/Adventure-HD-Wallpaper.jpg" class="object-cover select-none w-full h-auto bg-gray-200 rounded cursor-zoom-in aspect-[5/6] lg:aspect-[2/3] xl:aspect-[3/4]" alt="photo gallery image 01"></li>
+                <li><img x-on:click="imageGalleryOpen" src="https://w0.peakpx.com/wallpaper/389/253/HD-wallpaper-ktm-adventure-390-ktm-lover-off-road-king.jpg" class="object-cover select-none w-full h-auto bg-gray-200 rounded cursor-zoom-in aspect-[5/6] lg:aspect-[2/3] xl:aspect-[3/4]" alt="photo gallery image 07"></li>
+                <li><img x-on:click="imageGalleryOpen" src="https://wallpapers.com/images/hd/adventure-1920-x-1080-picture-i99yh8ljhuqmvegu.jpg" class="object-cover select-none w-full h-auto bg-gray-200 rounded cursor-zoom-in aspect-[5/6] lg:aspect-[2/3] xl:aspect-[3/4]" alt="photo gallery image 08"></li>
+                <li><img x-on:click="imageGalleryOpen" src="https://images.pexels.com/photos/238631/pexels-photo-238631.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500  " class="object-cover select-none w-full h-auto bg-gray-200 rounded cursor-zoom-in aspect-[5/6] lg:aspect-[2/3] xl:aspect-[3/4]" alt="photo gallery image 09"></li>
+                <li><img x-on:click="imageGalleryOpen" src="https://c0.wallpaperflare.com/preview/766/693/165/nature-and-landscapes-travel-adventure-trip.jpg" class="object-cover select-none w-full h-auto bg-gray-200 rounded cursor-zoom-in aspect-[5/6] lg:aspect-[2/3] xl:aspect-[3/4]" alt="photo gallery image 10"></li>
+                <li><img x-on:click="imageGalleryOpen" src="https://w0.peakpx.com/wallpaper/224/261/HD-wallpaper-serenity-on-the-summit-sunset-camping-adventure-beautyofnatutre-nature-natureadventures-sunset.jpg" class="object-cover select-none w-full h-auto bg-gray-200 rounded cursor-zoom-in aspect-[5/6] lg:aspect-[2/3] xl:aspect-[3/4]" alt="photo gallery image 06"></li>
+                <li><img x-on:click="imageGalleryOpen" src="https://media.istockphoto.com/id/1445528561/photo/aerial-view-of-man-and-woman-raising-holding-arms-in-mountains-in-norway.webp?b=1&s=170667a&w=0&k=20&c=1ObJMibIRGZdgK63LZG9cuH36l-jd_ByuAeG1nwpDqQ=" class="object-cover select-none w-full h-auto bg-gray-200 rounded cursor-zoom-in aspect-[5/6] lg:aspect-[2/3] xl:aspect-[3/4]" alt="photo gallery image 07"></li>
+                
+                <li><img x-on:click="imageGalleryOpen" src="https://static.vecteezy.com/system/resources/previews/032/991/881/non_2x/men-hiking-mountain-peak-backpacks-filled-with-adventure-and-exploration-generated-by-ai-free-photo.jpg" class="object-cover select-none w-full h-auto bg-gray-200 rounded cursor-zoom-in aspect-[5/6] lg:aspect-[2/3] xl:aspect-[3/4]" alt="photo gallery image 08"></li>
+                <li><img x-on:click="imageGalleryOpen" src="https://static.vecteezy.com/system/resources/thumbnails/028/690/635/small_2x/outdoors-camping-car-travel-mountain-adventure-summer-vacations-motor-home-generated-by-ai-photo.jpg" class="object-cover select-none w-full h-auto bg-gray-200 rounded cursor-zoom-in aspect-[5/6] lg:aspect-[2/3] xl:aspect-[3/4]" alt="photo gallery image 09"></li>
+                <li><img x-on:click="imageGalleryOpen" src="https://img.freepik.com/free-photo/rear-view-young-backpacker-couple-sitting-relax-front-tent-near-lake-with-coffee-set-making-fresh-coffee-grinder-while-camping-trip-summer-vacation_1150-48396.jpg?size=626&ext=jpg&ga=GA1.1.1222169770.1701648000&semt=ais" class="object-cover select-none w-full h-auto bg-gray-200 rounded cursor-zoom-in aspect-[5/6] lg:aspect-[2/3] xl:aspect-[3/4]" alt="photo gallery image 10"></li>
+              </ul>
+            </div>
+            <template x-teleport="body">
+              <div x-show="imageGalleryOpened" x-transition:enter="transition ease-in-out duration-300" x-transition:enter-start="opacity-0" x-transition:leave="transition ease-in-in duration-300" x-transition:leave-end="opacity-0" @click="imageGalleryClose" @keydown.window.escape="imageGalleryClose" x-trap.inert.noscroll="imageGalleryOpened" class="fixed inset-0 z-[99] flex items-center justify-center bg-black bg-opacity-50 select-none cursor-zoom-out" x-cloak>
+                <div class="relative flex items-center justify-center w-11/12 xl:w-2/5 h-11/12">
+                  <div @click="$event.stopPropagation(); $dispatch('image-gallery-prev')" class="absolute left-0 flex items-center justify-center text-white translate-x-10 rounded-full cursor-pointer xl:-translate-x-24 2xl:-translate-x-32 bg-white/10 w-14 h-14 hover:bg-white/20">
+                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                    </svg>
+                  </div>
+                  <img x-show="imageGalleryOpened" x-transition:enter="transition ease-in-out duration-300" x-transition:enter-start="opacity-0 transform scale-50" x-transition:leave="transition ease-in-in duration-300" x-transition:leave-end="opacity-0 transform scale-50" class="object-contain object-center w-full h-full select-none cursor-zoom-out" :src="imageGalleryActiveUrl" alt="" style="display: none;">
+                  <div @click="$event.stopPropagation(); $dispatch('image-gallery-next');" class="absolute right-0 flex items-center justify-center text-white -translate-x-10 rounded-full cursor-pointer xl:translate-x-24 2xl:translate-x-32 bg-white/10 w-14 h-14 hover:bg-white/20">
+                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </template>
+          </div>
+          <a href="index.html#Gallery" class="text-black text-left  border border-black mb-5 py-2 px-5 lg:ml-24 mt-5 rounded inline-flex items-center">
+            Back
+            
+        </a>
+    
+    </section>
+    
+     
+    </section>
+</body>
+</html>
